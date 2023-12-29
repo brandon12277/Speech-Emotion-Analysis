@@ -1,6 +1,6 @@
 flask
 gunicorn
-tensorflow
+tensorflow-cpu
 matplotlib
 librosa
 flask_cors
