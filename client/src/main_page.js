@@ -89,7 +89,7 @@ reader.readAsArrayBuffer(file);
             document.querySelectorAll(".filename")[0].innerHTML = "File Name : "+file.name
             formData.append('audio_blob', file);
             if(document.querySelectorAll(".load")[0])document.querySelectorAll(".load")[0].style.display = "flex";
-            const result = await axios.post("http://127.0.0.1:5000/upload",formData)
+            const result = await axios.post("https://6fd9-103-101-213-212.ngrok-free.app/upload",formData)
                 console.log(result)
                 if(result.data){
                    
