@@ -8,16 +8,10 @@ from flask_cors import CORS
 import subprocess
 import numpy as np
 from PIL import Image
-import gzip
-import shutil
 
 
-def compress_h5(input_file_path, output_file_path):
-    with open(input_file_path, 'rb') as f_in, gzip.open(output_file_path, 'wb') as f_out:
-        shutil.copyfileobj(f_in, f_out)
 
 
-input_path = 'emotion_dect_75.h5'
 
 
 
@@ -30,6 +24,7 @@ CORS(app, origins="*", supports_credentials=True)
 
 
 model = tf.keras.models.load_model("emotion_dect_75.h5")
+os.makedirs("uploads", exist_ok=True)
 
 class UniqueUIDGenerator:
     def __init__(self):
