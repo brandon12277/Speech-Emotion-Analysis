@@ -8,7 +8,7 @@ from flask_cors import CORS
 import subprocess
 import numpy as np
 from PIL import Image
-
+import threading
 
 
 
@@ -77,8 +77,9 @@ def image_processing(audio_path):
         return img_array       
 
     
-    except e:
-        return 1
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return None
        
 
     
@@ -127,6 +128,9 @@ def upload_file():
 
     return response  
             
+thread = threading.Thread(target=upload_file)
+thread.start()
+thread.join() 
 
 if __name__ == '__main__':
     app.run(debug=True)
