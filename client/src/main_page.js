@@ -53,31 +53,69 @@ export default function Main_page(){
               document.getElementById("error").textContent = 'File size exceeds 10MB limit.';
               return;
             }
+
+            const container1 = document.querySelectorAll(".spect")[0];
+            const container2 = document.querySelectorAll(".spectgrey")[0];
+            const canvasToRemove = document.querySelector('.specto'); 
+            const canvasToRemove2 = document.querySelector('.specto-grey'); 
+
+
+if (canvasToRemove) {
+   
+    const parentContainer = canvasToRemove.parentNode;
+
+    parentContainer.removeChild(canvasToRemove);
+}
+if (canvasToRemove2) {
+   
+  const parentContainer = canvasToRemove2.parentNode;
+
+  parentContainer.removeChild(canvasToRemove2);
+}
             setPred(null)
             document.getElementById("audioPlayer").src = URL.createObjectURL(file)
             document.querySelectorAll(".spect")[0].style.display = "none"
             document.querySelectorAll(".spectgrey")[0].style.display = "none"
-            var canvasElem = document.getElementById('spectrogram-canvas');
-            var canvasElemGrey = document.getElementById('spectrogram-canvas-grey');
-            var ctx = canvasElem.getContext('2d');
-            var ctx2 = canvasElemGrey.getContext('2d');
-            // Clear the entire canvas
-            ctx.clearRect(0, 0, canvasElem.width, canvasElem.height);
-            ctx2.clearRect(0, 0, canvasElemGrey.width, canvasElemGrey.height);
+            const canvas = document.createElement('canvas');
+    
+            // Set canvas width and height
+            canvas.width = 400;  // Set the width of the canvas
+            canvas.height = 200; // Set the height of the canvas
+        
+            // Add classes 'spect' and 'specto' to the canvas element
+            canvas.classList.add('specto');
+
+            const canvasGrey = document.createElement('canvas');
+    
+            // Set canvas width and height
+            canvasGrey.width = 400;  // Set the width of the canvas
+            canvasGrey.height = 200; // Set the height of the canvas
+        
+            // Add classes 'spect' and 'specto' to the canvas element
+            canvasGrey.classList.add('specto-grey');
+
+            
+
+            const ctx = canvas.getContext('2d');
+            const ctx2 = canvas.getContext('2d');
+            
 
          var reader = new FileReader();
 
      reader.onload = function() {
 
-    var arrayBuffer = reader.result;
-
-    wavSpectro.drawSpectrogram({arrayBuffer: arrayBuffer, canvasElem: canvasElem, cmap: 'jet'}, function () {
-     document.querySelectorAll(".spect")[0].style.display = "block"
+    let arrayBuffer = reader.result;
+   
+    wavSpectro.drawSpectrogram({arrayBuffer: reader.result, canvasElem: canvas, cmap: 'jet'}, function () {
+      container1.appendChild(canvas);
+      container1.style.display = "block"
      
      
     });
-    wavSpectro.drawSpectrogram({arrayBuffer: arrayBuffer, canvasElem: canvasElemGrey, cmap: 'bone'}, function () {
-        document.querySelectorAll(".spectgrey")[0].style.display = "block"
+    
+    wavSpectro.drawSpectrogram({arrayBuffer: reader.result, canvasElem: canvasGrey, cmap: 'bone'}, function () {
+      container2.appendChild(canvasGrey);
+      container2.style.display = "block"
     
     });
 
@@ -146,11 +184,11 @@ reader.readAsArrayBuffer(file);
                <div className="specto-images">
 
                <div className="spect">
-               <canvas className="specto" id="spectrogram-canvas"></canvas><p>Original Spectogram</p>
+               <p>Original Spectogram</p>
                </div>
                
                <div className="spectgrey">
-                 <canvas className="specto-grey" id="spectrogram-canvas-grey"></canvas><p>Processesed Spectogram</p>
+                 <p>Processesed Spectogram</p>
                </div>
              </div>
             
