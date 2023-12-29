@@ -21,9 +21,9 @@ import SlidingBar from './slidingbar';
 
 
 export default function Main_page(){
-    const [audioFile, setAudioFile] = useState(null);
-    const fileInputRef = useRef(null);
-    const waveformRef = useRef(null);
+    const [audioFile, setAudioFile] = useState(null)
+    const fileInputRef = useRef(null)
+    const waveformRef = useRef(null)
     const [pred,setPred] = useState()
     const [logos,setLogo] = useState([neutral,calm,happy,sad,angry,fearful,disgust,surprised])
     const [emotion,setEmo] = useState(['Neutral','Calmness','Happyness','Sadness','Angry','Fearful','Disgust','Surprised'])
