@@ -1,0 +1,66 @@
+.sliding-bar {
+    position: relative;
+    width: 90%;
+    display: flex;
+    
+    flex-direction: column;
+    
+    padding: 0 20px;
+  }
+  .emotions-div{
+    display: flex;
+    gap:5%;
+  }
+  .select{
+    display: flex;
+    flex-direction: column;
+    
+  }
+ .ball{
+  border-radius: 50%;
+  background-color: #1c1c1c;
+  width:1%;
+  height:100%;
+ }
+  @keyframes flash{
+    0%{
+      transform:scale(1.4);
+    }
+    100%{
+      transform:scale(1);
+    }
+  }
+  @keyframes static-flash{
+    0%{
+      transform:scale(1.4);
+    }
+    100%{
+      transform:scale(1.4);
+    }
+  }
+  .option {
+    
+    
+   
+  }
+  
+  .point{
+    transition: 2s;
+  }
+  
+  .selected {
+    font-weight: bold;
+  }
+  
+  .pointer {
+    display: flex;
+    transition:2s;
+    margin-top: 2%;
+    width:97%;
+    height:2vh;
+    background-color: white;
+    border-radius: 0.45em;
+    box-shadow: inset #1c1c1c 0px 0px 1px;
+  }
+  
+  

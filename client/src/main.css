@@ -1,0 +1,118 @@
+.cont{
+    width:100%;
+    height:100%;
+    margin:0;
+    padding:0;
+    display: flex;
+   
+}
+.cont2{
+    background: url("./back.jpg");
+    width:100%;
+    height:100%;
+}
+.navbar{
+    
+    z-index: 1;
+    width:15%;
+    height:100%;
+    background-color: #77DD77;
+    box-shadow: #1c1c1c 0.5px 0px 3px;
+}
+#audioPlayer{
+    margin:1%;
+}
+.spect,.spectgrey{
+    display: none;
+}
+.specto-images{
+    display: flex;
+    gap:10%;
+    margin:1%;
+    font-family: 'Inter', sans-serif;
+}
+.specto{
+    width:400px;
+    height:auto;
+    
+}
+.specto-grey{
+    width:400px;
+    height:auto;
+}
+.descp{
+    margin:5%;
+    font-family: 'Inter', sans-serif;
+}
+h4{
+    color:#B22B27;
+}
+.load{
+    font-family: 'Inter', sans-serif;
+}
+#error{
+    margin:1%;
+    font-family: 'Inter', sans-serif;
+   color: #B22B27;
+}
+.import{
+    margin-top: 3%;
+    width:100%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+   
+    padding:1%;
+    gap:10%;
+    font-family: 'Inter', sans-serif;
+
+}
+.import_audio{
+    cursor:pointer;
+   
+    box-shadow:  #B22B27 0px 0px 1px;
+    box-shadow: inset #B22B27 0px 0px 1px;
+    background-color: #B22B27;
+    color:white;
+    border: 2px solid #B22B27;
+    border-radius: 0.45em;
+    margin  : 1%;
+    padding:1% 2% 1% 2%;
+    font-family: 'Inter', sans-serif;
+    transition: 0.5s;
+}
+.import_audio:hover{
+    background-color: #B22B27;
+    color:white;
+}
+.filename{
+    font-family: 'Inter', sans-serif;
+    margin:1%;
+}
+#startRecording{
+    cursor:pointer;
+    background-color: #B22B27;
+    border-radius: 50%;
+    border:none;
+    outline:none;
+    padding:3%;
+}
+
+.load,.prediction{
+    width:100%;
+    height:30%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+.prediction{
+
+    display:flex;
+    flex-direction: column;
+    font-family: 'Inter', sans-serif;
+}
+.emotion{
+    width:40px;
+    height:auto;
+    transition:1s;
+}
