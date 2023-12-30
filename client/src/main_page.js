@@ -45,9 +45,10 @@ export default function Main_page(){
       
           
         document.getElementById("audioInput").addEventListener('change', async (e) => {
-
+       
             const file = e.target.files[0];
             if(!file)return;
+            document.getElementById("error").innerHTML = ""
             const size = file.size / (1024 * 1024);
             if (size > 10) {
               document.getElementById("error").textContent = 'File size exceeds 10MB limit.';
@@ -78,20 +79,18 @@ if (canvasToRemove2) {
             document.querySelectorAll(".spectgrey")[0].style.display = "none"
             const canvas = document.createElement('canvas');
     
-            // Set canvas width and height
-            canvas.width = 400;  // Set the width of the canvas
-            canvas.height = 200; // Set the height of the canvas
+            canvas.width = 400;  
+            canvas.height = 200; 
         
-            // Add classes 'spect' and 'specto' to the canvas element
+           
             canvas.classList.add('specto');
 
             const canvasGrey = document.createElement('canvas');
     
-            // Set canvas width and height
-            canvasGrey.width = 400;  // Set the width of the canvas
-            canvasGrey.height = 200; // Set the height of the canvas
+            canvasGrey.width = 400;  
+            canvasGrey.height = 200; 
         
-            // Add classes 'spect' and 'specto' to the canvas element
+          
             canvasGrey.classList.add('specto-grey');
 
             
@@ -127,22 +126,30 @@ reader.readAsArrayBuffer(file);
             document.querySelectorAll(".filename")[0].innerHTML = "File Name : "+file.name
             formData.append('audio_blob', file);
             if(document.querySelectorAll(".load")[0])document.querySelectorAll(".load")[0].style.display = "flex";
-            const result = await axios.post("https://6fd9-103-101-213-212.ngrok-free.app/upload",formData)
-                console.log(result)
-                if(result.data){
+            axios.post("https://6fd9-103-101-213-212.ngrok-free.app/upload",formData)
+            .then(result =>{
+              if(result.data){
                    
+                console.log(audioFile)
+                setTimeout(()=>{
                     console.log(audioFile)
-                    setTimeout(()=>{
-                        console.log(audioFile)
-                    },1000)
-                    console.log(result.data.data)
-                    setPred(result.data)
-                   
-                    setTimeout(()=>{
-                        document.getElementById("point").style.width = result.data.data*15+"%";
-                    },500)
+                },1000)
+                console.log(result.data.data)
+                setPred(result.data)
+               
+                setTimeout(()=>{
+                    document.getElementById("point").style.width = result.data.data*15+"%";
+                },500)
 
-                }
+            }
+            }
+                
+            )
+            .catch(err =>{
+                document.getElementById("error").innerHTML = "The Flask API is currently under maintainence and will be up and active in a few hours"
+            })
+               
+               
         })
 
        
