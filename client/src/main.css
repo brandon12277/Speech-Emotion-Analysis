@@ -41,10 +41,10 @@
     height:auto;
 }
 .descp{
-    margin:5%;
+    margin:20% 5% 5% 5%;
     font-family: 'Inter', sans-serif;
 }
-h4{
+h5{
     color:#B22B27;
 }
 .load{

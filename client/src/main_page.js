@@ -126,7 +126,7 @@ reader.readAsArrayBuffer(file);
             document.querySelectorAll(".filename")[0].innerHTML = "File Name : "+file.name
             formData.append('audio_blob', file);
             if(document.querySelectorAll(".load")[0])document.querySelectorAll(".load")[0].style.display = "flex";
-            axios.post("https://6fd9-103-101-213-212.ngrok-free.app/upload",formData)
+            axios.post("https://5f7d-103-101-213-211.ngrok-free.app/upload",formData)
             .then(result =>{
               if(result.data){
                    
@@ -157,9 +157,9 @@ reader.readAsArrayBuffer(file);
     return(
         <div className="cont">
            <div className="navbar">
-              <img src={logo} style={{width:"140px",height:"auto",margin:"1%"}}></img>
+              <img src={logo} style={{width:"80%",height:"auto",margin:"1%"}}></img>
               <div className="descp">
-                 <h4> Range of Emotions</h4>
+                 <h5 style={{width:"90%",height:"auto",margin:"1%"}}> Range of Emotions</h5>
                  <p style={{fontSize:"80%"}}> <span style={{color:"#B22B27"}}>&#x2022;</span> Neutral </p>
                  <p style={{fontSize:"80%"}}> <span style={{color:"#B22B27"}}>&#x2022;</span> Calm </p>
                  <p style={{fontSize:"80%"}}> <span style={{color:"#B22B27"}}>&#x2022;</span> Happy </p>
@@ -216,6 +216,7 @@ reader.readAsArrayBuffer(file);
             </div>
            }
             </div>
+           
         </div>
     )
 }
