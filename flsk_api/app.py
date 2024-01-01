@@ -23,7 +23,7 @@ app = Flask(__name__)
 CORS(app, origins="*", supports_credentials=True)
 
 
-model = tf.keras.models.load_model("emotion_dect_75.h5")
+model = tf.keras.models.load_model("emotion_80.h5")
 os.makedirs("uploads", exist_ok=True)
 
 class UniqueUIDGenerator:

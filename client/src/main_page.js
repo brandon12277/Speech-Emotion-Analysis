@@ -47,6 +47,17 @@ export default function Main_page(){
         document.getElementById("audioInput").addEventListener('change', async (e) => {
        
             const file = e.target.files[0];
+            // var fileName = file.name;
+            var fileName = file.name
+            
+            var fileExtension = fileName.split('.').pop().toLowerCase();
+      
+            // List of allowed audio extensions
+            var allowedExtensions = ['mp3', 'wav', 'ogg'];
+            if (!allowedExtensions.includes(fileExtension)) {
+              document.getElementById("error").textContent = 'Invalid file extension only .mp3 or .wav files allowed';
+              return;
+            }
             if(!file)return;
             document.getElementById("error").innerHTML = ""
             const size = file.size / (1024 * 1024);
@@ -183,7 +194,7 @@ reader.readAsArrayBuffer(file);
                 <p className="filename"></p>
                 <audio id="audioPlayer" controls ></audio>
   
-                <input ref={fileInputRef} name="audio_file" type="file" id="audioInput" accept=".mp3, .wav, .ogg" style={{display:'none'}}></input>
+                <input ref={fileInputRef} name="audio_file" type="file" id="audioInput" accept=".mp3, .wav" style={{display:'none'}}></input>
                 
 
                
