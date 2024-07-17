@@ -128,9 +128,9 @@ def upload_file():
 
     return response  
             
-thread = threading.Thread(target=upload_file)
-thread.start()
-thread.join() 
+# thread = threading.Thread(target=upload_file)
+# thread.start()
+# thread.join() 
 
 if __name__ == '__main__':
     app.run(debug=True)
