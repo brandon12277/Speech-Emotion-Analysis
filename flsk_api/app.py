@@ -69,7 +69,7 @@ def image_processing(audio_path):
         img_array = tf.keras.preprocessing.image.img_to_array(img)
     # Expand dimensions to match the input shape of the model (batch size, height, width, channels)
         img_array = np.expand_dims(img_array, axis=0)
-        return img_array
+        return  img_array,url
 
     
     except Exception as e:
@@ -91,7 +91,7 @@ def upload_file():
             f.save(audio)
     
     print(f)
-    resized_spectrogram_image = image_processing(url)
+    resized_spectrogram_image,save_path = image_processing(url)
     result =  model.predict(resized_spectrogram_image)
     print(result)
     class_label = 0
@@ -115,6 +115,7 @@ def upload_file():
     
 
     os.remove(url)
+    os.remove(save_path)
     response = jsonify({'data': class_label})
 
     
@@ -123,9 +124,9 @@ def upload_file():
 
     return response  
             
-# thread = threading.Thread(target=upload_file)
-# thread.start()
-# thread.join() 
+thread = threading.Thread(target=upload_file)
+thread.start()
+thread.join() 
 
 if __name__ == '__main__':
     app.run(debug=True)
