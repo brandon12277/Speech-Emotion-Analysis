@@ -44,32 +44,37 @@ generator = UniqueUIDGenerator()
 def image_processing(audio_path):
     try:
         y, sr = librosa.load(audio_path, sr=None)
-        
-        uid = generator.generate_uid()
-        url  = 'uploads/'+uid+'.png'
-    # Compute the mel spectrogram
+
+    
+
+        # Compute the mel spectrogram
         mel_spectrogram = librosa.feature.melspectrogram(y=y, sr=sr, n_fft=2048, hop_length=512, n_mels=128)
 
-    # Convert to decibels (log scale)
+     # Convert to decibels (log scale)
         mel_spectrogram_db = librosa.power_to_db(mel_spectrogram, ref=np.max)
 
-    # Create the plot
-        plt.figure(figsize=(4, 4))
+  
+        plt.figure(figsize=(4, 4)) 
         librosa.display.specshow(mel_spectrogram_db, sr=sr, hop_length=512, x_axis=None, y_axis=None)
         plt.axis('off')
         plt.tight_layout(pad=0)
 
-    # Save the plot as an image file in the specified folder
-        plt.savefig(url, format='png', bbox_inches='tight', pad_inches=0)
+        buf = io.BytesIO()
+        plt.savefig(buf, format='png', bbox_inches='tight', pad_inches=0)
         plt.close()
 
+        # Convert the BytesIO buffer to a NumPy array
+        buf.seek(0)
+        img = Image.open(buf).convert('RGB')
 
-        img = tf.keras.preprocessing.image.load_img(url, target_size=(128,128))
-    # Convert the image to a NumPy array
-        img_array = tf.keras.preprocessing.image.img_to_array(img)
-    # Expand dimensions to match the input shape of the model (batch size, height, width, channels)
-        img_array = np.expand_dims(img_array, axis=0)
-        return img_array
+        # Resize the image to the target size
+        img_resized = img.resize((128,128), Image.BICUBIC)
+
+        # Convert the resized image to a NumPy array
+        img_array =np.expand_dims(np.asarray(img_resized), axis=0)
+        img.close()
+        img_resized.close()
+        return img_array       
 
     
     except Exception as e:
@@ -82,16 +87,8 @@ def image_processing(audio_path):
 
 
 
-@app.route('/upload', methods=['POST'])
+@app.route('/getPredict', methods=['POST'])
 def upload_file():
-    f = request.files['audio_blob']
-    uid = generator.generate_uid()
-    url  = 'uploads/'+uid+'.wav'
-    with open(url, 'wb') as audio:
-            f.save(audio)
-    
-    print(f)
-    resized_spectrogram_image = image_processing(url)
     result =  model.predict(resized_spectrogram_image)
     print(result)
     class_label = 0
