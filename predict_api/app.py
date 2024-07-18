@@ -1,14 +1,14 @@
-from flask import Flask, request, redirect,jsonify
+from flask import Flask, request, jsonify
 import tensorflow as tf
 import matplotlib.pyplot as plt
-import os
-import io
-import librosa
+
 from flask_cors import CORS
-import subprocess
+
 import numpy as np
 from PIL import Image
-import threading
+
+import json
+import numpy as np
 
 
 
@@ -17,7 +17,6 @@ import threading
 
 
 
-import random
 
 app = Flask(__name__)
 CORS(app, origins="*", supports_credentials=True)
@@ -38,7 +37,11 @@ model = tf.keras.models.load_model("emotion_80.h5")
 
 @app.route('/getPredict', methods=['POST'])
 def upload_file():
-    img = request.files['img']
+    img_data = request.form.get('img')
+    
+    
+    img = json.loads(img_data)
+    img = np.array(img)
     result =  model.predict(img)
     print(result)
     class_label = 0
@@ -77,4 +80,4 @@ def upload_file():
 if __name__ == '__main__':
      
    
-     app.run(debug=True,port=5001)
+     app.run(debug=True)

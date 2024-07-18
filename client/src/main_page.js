@@ -137,7 +137,7 @@ reader.readAsArrayBuffer(file);
             document.querySelectorAll(".filename")[0].innerHTML = "File Name : "+file.name
             formData.append('audio_blob', file);
             if(document.querySelectorAll(".load")[0])document.querySelectorAll(".load")[0].style.display = "flex";
-            axios.post("http://127.0.0.1:5000/upload",formData)
+            axios.post("https://speech-emotion-analysis.onrender.com/upload",formData)
             .then(result =>{
               if(result.data){
                    
@@ -146,14 +146,25 @@ reader.readAsArrayBuffer(file);
                     console.log(audioFile)
                 },1000)
                 console.log(result.data.data)
-                formData.append('img',result.data.data)
+                const form = new FormData();
+                form.append('img',JSON.stringify(result.data.data))
 
+                axios.post("http://127.0.0.1:5000/getPredict",form)
+                .then(res =>{
+
+                  if(res.data){
+
+
+                      console.log(res.data.data)
+                      setPred(result.data)
                
-                setPred(result.data)
-               
-                setTimeout(()=>{
-                    // document.getElementById("point").style.width = result.data.data*15+"%";
-                },500)
+                     setTimeout(()=>{
+                        document.getElementById("point").style.width = res.data.data*15+"%";
+                      },500)
+                  }
+                   
+                })
+                
 
             }
             }
