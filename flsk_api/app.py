@@ -5,7 +5,7 @@ import os
 import io
 import librosa
 from flask_cors import CORS
-import subprocess
+
 import numpy as np
 from PIL import Image
 import threading
@@ -23,7 +23,7 @@ app = Flask(__name__)
 CORS(app, origins="*", supports_credentials=True)
 
 
-model = tf.keras.models.load_model("emotion_80.h5")
+
 os.makedirs("uploads", exist_ok=True)
 
 class UniqueUIDGenerator:
@@ -92,31 +92,13 @@ def upload_file():
     
     print(f)
     resized_spectrogram_image,save_path = image_processing(url)
-    result =  model.predict(resized_spectrogram_image)
-    print(result)
-    class_label = 0
-    if result[0][0] == 1:
-        class_label = 0
-
-    elif result[0][1] == 1:
-        class_label = 1
-    elif result[0][2] == 1:
-        class_label = 2
-    elif result[0][3] == 1:
-        class_label = 3
-    elif result[0][4] == 1:
-        class_label = 4
-    elif result[0][5] == 1:
-        class_label = 5
-    elif result[0][6] == 1:
-        class_label = 6
-    elif result[0][7] == 1:
-        class_label = 7
+   
+    
     
 
     os.remove(url)
     os.remove(save_path)
-    response = jsonify({'data': class_label})
+    response = jsonify({'data': resized_spectrogram_image.tolist()})
 
     
     response.headers.add('Access-Control-Allow-Methods', 'POST, OPTIONS')

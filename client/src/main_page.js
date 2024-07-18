@@ -146,10 +146,13 @@ reader.readAsArrayBuffer(file);
                     console.log(audioFile)
                 },1000)
                 console.log(result.data.data)
+                formData.append('img',result.data.data)
+
+               
                 setPred(result.data)
                
                 setTimeout(()=>{
-                    document.getElementById("point").style.width = result.data.data*15+"%";
+                    // document.getElementById("point").style.width = result.data.data*15+"%";
                 },500)
 
             }
