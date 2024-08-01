@@ -11,7 +11,12 @@ import json
 import numpy as np
 
 
+import gzip
+import shutil
 
+# with open('emotion_80.h5', 'rb') as f_in:
+#     with gzip.open('emotion_80.h5.h5.gz', 'wb') as f_out:
+#         shutil.copyfileobj(f_in, f_out)
 
 
 
