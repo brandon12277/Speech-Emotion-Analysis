@@ -149,7 +149,7 @@ reader.readAsArrayBuffer(file);
                 const form = new FormData();
                 form.append('img',JSON.stringify(result.data.data))
 
-                axios.post("http://127.0.0.1:5000/getPredict",form)
+                axios.post("https://742d-45-112-68-67.ngrok-free.app/getPredict",form)
                 .then(res =>{
 
                   if(res.data){

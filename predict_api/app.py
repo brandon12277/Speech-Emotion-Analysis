@@ -14,13 +14,6 @@ import numpy as np
 import gzip
 import shutil
 
-# with open('emotion_80.h5', 'rb') as f_in:
-#     with gzip.open('emotion_80.h5.h5.gz', 'wb') as f_out:
-#         shutil.copyfileobj(f_in, f_out)
-
-
-
-
 
 
 app = Flask(__name__)
@@ -84,5 +77,4 @@ def upload_file():
 
 if __name__ == '__main__':
      
-   
-     app.run(debug=True)
+    app.run(host='127.0.0.1', port=5001,debug=True)
