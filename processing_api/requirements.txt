@@ -1,8 +1,0 @@
-flask
-gunicorn
-tensorflow-cpu
-matplotlib
-librosa
-flask_cors
-numpy
-Pillow
